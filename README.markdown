@@ -6,13 +6,15 @@ This is a set of tools that make your life easier if you have lots of translatio
 Installation
 ============
 
-You normally would want to install this gem as stand-alons (i.e. not throu environment.rb / Gemfile) because it is not to be called from the application but as a command line utility.
+To use the utils in Rails 2.x, add to your `environment.rb`:
 
-Install it by:
+    config.gem "i18n-verify"
 
-    gem install i18n-verify
-    
-If you do want to include it in your environment.rb or Gemfile just insert the standard line (perhaps in the :development group in Gemfile; and don't forget to run `bundle install`.
+If using Rails 3.x, add to your Gemfile (perhaps in the :development group)
+
+    gem "i18n-verify"
+
+and run 'bundle install'.
 
 Usage
 =====
