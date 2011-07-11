@@ -1,7 +1,7 @@
 Gem::Specification.new do |gem|
   gem.name         = "i18n-verify"
   gem.homepage     = "http://github.com/fastcatch/i18n-verify"
-  gem.version      = "0.1.0"
+  gem.version      = "0.0.1"
   gem.platform     = Gem::Platform::RUBY
   gem.license      = "MIT"
   gem.summary      = %Q{Tools to verify your Ruby on Rails localizations}
