@@ -8,6 +8,6 @@ Gem::Specification.new do |gem|
   gem.description  = %Q{It helps you find keys, undefined translations, duplicate keys, and more}
   gem.email        = "axz10@cwru.edu"
   gem.authors      = ["fastcatch"]
-  gem.files        = Dir.glob("{lib/**/*") + %w(LICENSE.txt README.markdown)
+  gem.files        = Dir.glob("lib/**/*") + %w(LICENSE.txt README.markdown)
   gem.require_path = 'lib'
 end
