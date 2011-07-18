@@ -16,7 +16,7 @@ namespace :i18n do
     require "#{::Rails.root.to_s}/config/environment.rb"
     regexp = Regexp.new(args[:regexp] || "")
     group_by_filename = args[:group_by_filename]
-    checker = I18nVerify:Checker.new(I18n.config.load_path)
+    checker = I18nVerify::Checker.new(I18n.config.load_path)
     checker.find_key(regexp,group_by_filename)
   end
 
@@ -34,9 +34,8 @@ namespace :i18n do
   desc "Checks if translations are complete or there are missing ones"
   task :is_complete do |t, args|
     require "#{::Rails.root.to_s}/config/environment.rb"
-    translations = load_files( I18n.config.load_path )
-    locales_requested = ENV['locales'].downcase.split(',')
-    checker = I18nVerify:Checker.new(I18n.config.load_path)
+    locales_requested = (ENV['locales'] || "").downcase.split(',')
+    checker = I18nVerify::Checker.new(I18n.config.load_path)
     checker.is_complete?(locales_requested)
   end
 
@@ -53,9 +52,8 @@ namespace :i18n do
   desc "Checks if any keys are translated multiple times"
   task :duplicates do |t, args|
     require "#{::Rails.root.to_s}/config/environment.rb"
-    translations = load_files( I18n.config.load_path )
-    locales_requested = ENV['locales'].downcase.split(',')
-    checker = I18nVerify:Checker.new(I18n.config.load_path)
+    locales_requested = (ENV['locales'] || "").downcase.split(',')
+    checker = I18nVerify::Checker.new(I18n.config.load_path)
     checker.duplicates?(locales_requested)
   end
 
