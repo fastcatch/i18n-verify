@@ -54,7 +54,7 @@ namespace :i18n do
     require "#{::Rails.root.to_s}/config/environment.rb"
     locales_requested = (ENV['locales'] || "").downcase.split(',')
     checker = I18nVerify::Checker.new(I18n.config.load_path)
-    checker.duplicates?(locales_requested)
+    checker.duplicates(locales_requested)
   end
 
 =begin

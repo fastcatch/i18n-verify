@@ -4,7 +4,7 @@ module I18nVerify
       @translations = load_files(filenames)
     end
     
-    def find_key(match=Regexp.new(''), group_by_filename=false)
+    def find_key(regexp=Regexp.new(''), group_by_filename=false)
       # select translations with matching keys
       matching_translations = @translations.select {|t| [t[:locale],t[:key]].join('.') =~ regexp}
 
@@ -29,18 +29,22 @@ module I18nVerify
       locales = @translations.collect{|tr| tr[:locale]}.uniq
       locales_to_check = locales_requested.empty? ? locales : (locales & locales_requested)
 
-      puts "Checking locales #{locales_to_check.inspect} out of #{locales.inspect} for completeness"
-      locales_to_check.permutation.each do |first, second|
-        first_translations = @translations.select {|translation| translation[:locale] == first}
-        second_translations = @translations.select {|translation| translation[:locale] == second}
+      if locales_to_check.size <= 1
+        puts "Need at least two locales; found #{locales_to_check.size}: #{locales_to_check.join(',')}"
+      else
+        puts "Checking locales #{locales_to_check.inspect} out of #{locales.inspect} for completeness"
+        locales_to_check.permutation.each do |first, second|
+          first_translations = @translations.select {|translation| translation[:locale] == first}
+          second_translations = @translations.select {|translation| translation[:locale] == second}
 
-        differences = first_translations.select {|f| f if second_translations.none? {|s| f[:key]==s[:key]} }.compact
-        if differences.empty?
-          puts "#{first} => #{second}: complete\n"
-        else
-          puts "Missing from #{second} vs. #{first}:\n"
-          differences.each do |difference|
-            puts " " + [difference[:locale], difference[:key]].join('.') + " defined for #{first} in #{difference[:filename]}\n"
+          differences = first_translations.select {|f| f if second_translations.none? {|s| f[:key]==s[:key]} }.compact
+          if differences.empty?
+            puts "#{first} => #{second}: complete\n"
+          else
+            puts "Missing from #{second} vs. #{first}:\n"
+            differences.each do |difference|
+              puts " " + [difference[:locale], difference[:key]].join('.') + " defined for #{first} in #{difference[:filename]}\n"
+            end
           end
         end
       end
@@ -81,7 +85,7 @@ module I18nVerify
     def load_files(filenames)
       translations = []
       filenames.each do |filename|
-        puts "Loading: #{filename}"
+        # puts "Loading: #{filename}"
         type = File.extname(filename).tr('.', '').downcase.to_sym
         case type
           when :rb
