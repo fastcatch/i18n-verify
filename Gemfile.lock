@@ -1,0 +1,13 @@
+PATH
+  remote: .
+  specs:
+    i18n-verify (0.0.4)
+
+GEM
+  specs:
+
+PLATFORMS
+  x86-mingw32
+
+DEPENDENCIES
+  i18n-verify!

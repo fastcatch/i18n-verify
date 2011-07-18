@@ -1,7 +1,5 @@
-require 'verify'
-
 module Verify
-  class VerifyRailtie < Rails::Railtie
+  class I18nVerifyRailtie < Rails::Railtie
     rake_tasks do
       load "tasks/verify.rake"
     end
