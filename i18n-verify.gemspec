@@ -9,9 +9,9 @@ Gem::Specification.new do |s|
   s.description       = %Q{It helps you find keys, undefined translations, duplicate keys, and more}
   s.email             = "axz10@cwru.edu"
   s.authors           = ["fastcatch"]
-  s.rubyforge_project = s.name
+  # s.rubyforge_project = s.name
 
-  s.required_rubygems_version = ">= 1.3.6"
+  # s.required_rubygems_version = ">= 1.3.6"
   
   # If you have runtime dependencies, add them here
   # s.add_runtime_dependency "other", "~> 1.2"

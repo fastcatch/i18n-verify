@@ -29,3 +29,8 @@ desc "Clean automatically generated files"
 task :clean do
   FileUtils.rm_rf "pkg"
 end
+
+desc "Push to rubygems"
+task :push do
+  system "gem push pkg/#{gemspec.name}-#{gemspec.version}.gem"
+end
