@@ -24,6 +24,7 @@ i18n-verify is a set of rake tasks:
 * `rake i18n:find_key` for finding keys
 * `rake i18n:is_complete` for checking if translations are complete
 * `rake i18n:duplicates` for finding keys with more than one translation for any given locale
+* `rake i18n:spell` for checking translation misspellings
 
 All of them will automatically pick up translation files configured for i18n (both yml and rb).
 
@@ -73,11 +74,27 @@ Examples:
 * `rake i18n:duplicates`
 * `rake i18n:duplicates locales=en`
 
+i18n:spell
+----------
+
+It checks for translation misspellings.
+
+    rake i18n:spell [locales=<list>]
+
+`locales` defaults to all and should be a comma separated list with no spaces.
+
+Please note that spelling requires aspell to be installed with all the dictionaries spelling is requested for.
+
+Examples:
+
+* `rake i18n:spell`
+* `rake i18n:spell locales=en,fr`
+
 To do
 =====
 
-* Add spell checking support
 * Write tests (tests for rake tasks, that is!)
+* More intelligent handling of spelling errors with a dictionary for accepted exceptions
 * ...
 
 Contributing to i18n-verify
@@ -94,4 +111,4 @@ Contributing to i18n-verify
 Copyright
 =========
 
-Copyright (c) 2011 fastcatch. See LICENSE.txt for further details.
+Copyright (c) 2011 fastcatch. See the LICENSE file for further details.
