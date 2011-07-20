@@ -3,7 +3,7 @@
 Gem::Specification.new do |s|
   s.name              = "i18n-verify"
   s.homepage          = "http://github.com/fastcatch/i18n-verify"
-  s.version           = "0.0.4"
+  s.version           = "0.0.5"
   s.platform          = Gem::Platform::RUBY
   s.summary           = %Q{Tools to verify your Ruby on Rails localizations}
   s.description       = %Q{It helps you find keys, undefined translations, duplicate keys, and more}
