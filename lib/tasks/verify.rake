@@ -42,7 +42,7 @@ namespace :i18n do
   #
   # duplicates helps in finding keys with multiple translations to the same locale
   #
-  # redundancies takes a command line rake param: the list of locales to check
+  # duplicates takes a command line rake param: the list of locales to check
   #   omit for all
   #
   # Examples:
@@ -57,15 +57,28 @@ namespace :i18n do
     checker.duplicates(locales_requested)
   end
 
-=begin
-  # TODO: write method
-  desc "Checks translations spellings"
-  task :spelling do |t, args|
+  #
+  # spell helps checking translation spelling
+  #
+  # note: it requires aspell and the proper dictionaries installed
+  #
+  # spell takes a command line rake param: the list of locales to check
+  #   omit for all
+  #
+  # Examples:
+  #   rake i18n:spell
+  #   rake i18n:spell locales=en,de
+  #
+  desc "Checks translations for spelling errors"
+  task :spell do |t, args|
+    require "#{::Rails.root.to_s}/config/environment.rb"
+    locales_requested = (ENV['locales'] || "").downcase.split(',')
+    checker = I18nVerify::Checker.new(I18n.config.load_path)
+    checker.spell(locales_requested)
   end
-=end
 
   desc "Run all checks"
-  task :verify => [:is_complete, :duplicates] do
+  task :verify => [:is_complete, :duplicates, :spell] do
   end
 
 end
