@@ -103,14 +103,13 @@ module I18nVerify
     def duplicates(locales_requested = [])
       locales = @translations.collect{|tr| tr[:locale]}.uniq
       locales_to_check = locales_requested.empty? ? locales : (locales & locales_requested)
-
       puts "Checking locales #{locales_to_check.inspect} out of #{locales.inspect} for redundancy"
 
       # collect and print duplicate translations
       locales_to_check.each do |locale|
         puts "#{locale}:"
         translations_by_key = @translations.select {|t| t[:locale] == locale}.uniq.group_by {|t| t[:key]}
-        translations_by_key.reject {|t| t[1].count == 1}.each_pair do |key, translations|
+        translations_by_key.reject {|key, value| value.one? }.each_pair do |key, translations|
           puts " #{key}: #{translations.collect{|t| t[:filename]}.join(", ")}"
         end
       end
