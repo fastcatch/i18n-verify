@@ -103,6 +103,7 @@ module I18nVerify
     def duplicates(locales_requested = [])
       locales = @translations.collect{|tr| tr[:locale]}.uniq
       locales_to_check = locales_requested.empty? ? locales : (locales & locales_requested)
+
       puts "Checking locales #{locales_to_check.inspect} out of #{locales.inspect} for redundancy"
 
       # collect and print duplicate translations
