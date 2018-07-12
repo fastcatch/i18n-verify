@@ -110,7 +110,7 @@ module I18nVerify
       locales_to_check.each do |locale|
         puts "#{locale}:"
         translations_by_key = @translations.select {|t| t[:locale] == locale}.uniq.group_by {|t| t[:key]}
-        translations_by_key.reject {|t| t[1].count == 1}.each_pair do |key, translations|
+        translations_by_key.reject {|key, value| value.one? }.each_pair do |key, translations|
           puts " #{key}: #{translations.collect{|t| t[:filename]}.join(", ")}"
         end
       end
